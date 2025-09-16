@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.5"
+  stroke="currentColor"
+  width="24"
+  height="24"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 3v2.25
+       M18.364 3.636l-1.591 1.591
+       M21 12h-2.25
+       m-.386 6.364l-1.591-1.591
+       M12 18.75V21
+       m-4.773-4.227l-1.591 1.591
+       M5.25 12H3
+       m4.227-4.773L5.636 5.636
+       M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+  />
+</svg>
