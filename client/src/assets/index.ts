@@ -10,6 +10,11 @@ import message from "./icon/message.svg";
 import continueIcon from "./icon/continue.svg";
 import close from "./icon/close.svg";
 import menu from "./icon/menu.svg";
+import gallery from "./icon/gallery.svg";
+import location from "./icon/location.svg";
+import multipleUser from "./icon/multiple-user.svg";
+import smile from "./icon/smile.svg";
+import check from "./icon/check.svg";
 
 interface IAssests {
   icons: {
@@ -25,6 +30,11 @@ interface IAssests {
     continue: string;
     close: string;
     menu: string;
+    gallery: string;
+    location: string;
+    multipleUser: string;
+    smile: string;
+    check: string;
   };
 }
 
@@ -41,6 +51,11 @@ const assets: IAssests = {
     message,
     close,
     menu,
+    gallery,
+    location,
+    multipleUser,
+    smile,
+    check,
     continue: continueIcon,
   },
 };

@@ -10,7 +10,7 @@ export default function Login(): React.ReactElement {
         title="My Circle | Signin"
         description="Log in to your My Circle account to access your photos and videos."
       />
-      <div className="font-satoshi min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900 transition-colors">
+      <div className="font-satoshi min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 transition-colors">
         <div className="max-w-[450px] w-[300px] mx-auto rounded-xl">
           <div className="flex justify-center mb-8">
             <img

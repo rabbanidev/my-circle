@@ -15,15 +15,16 @@ const navbarItems: INavbarItem[] = [
     icon: assets.icons.home,
   },
   {
+    title: "Message",
+    to: "/messages",
+    icon: assets.icons.message,
+  },
+  {
     title: "Notification",
     to: "/notifications",
     icon: assets.icons.notification,
   },
-  {
-    title: "Create",
-    to: "/create-post",
-    icon: assets.icons.plus,
-  },
+
   {
     title: "Profile",
     to: "/me",
@@ -53,10 +54,7 @@ export default function Sidebar(): React.ReactElement {
             className="h-6 object-contain dark:invert dark:brightness-200"
           />
         </Link>
-        <button
-          onClick={() => setOpen(!open)}
-          className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
-        >
+        <button onClick={() => setOpen(!open)} className="btn">
           {open ? (
             <img
               src={assets.icons.close}
@@ -75,7 +73,7 @@ export default function Sidebar(): React.ReactElement {
 
       {open && (
         <div
-          className="fixed inset-0 bg-black/40 z-30 lg:hidden"
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
           onClick={() => setOpen(false)}
         />
       )}
@@ -96,7 +94,7 @@ export default function Sidebar(): React.ReactElement {
           />
           <button
             title="Change your mode"
-            className="cursor-pointer p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="btn"
             onClick={() => setDark(!dark)}
           >
             {dark ? (

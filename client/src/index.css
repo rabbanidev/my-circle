@@ -4,4 +4,35 @@
 @theme {
   --font-satoshi: Satoshi;
 }
+
 @custom-variant dark (&:where(.dark, .dark *));
+
+@layer utilities {
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Button styles */
+  .btn {
+    @apply p-2 rounded-full  hover:bg-gray-200 dark:hover:bg-gray-700 transition cursor-pointer;
+    font-family: var(--font-satoshi);
+    transition: background-color 0.2s ease-in-out;
+  }
+}

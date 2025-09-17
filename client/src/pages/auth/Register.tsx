@@ -10,7 +10,7 @@ export default function Register(): React.ReactElement {
         title="My Circle | Signup"
         description="Create your My Circle account and start sharing photos and videos with your friends."
       />
-      <div className="min-h-screen flex flex-col justify-center py-8 sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900 transition-colors">
+      <div className="min-h-screen flex flex-col justify-center py-8 sm:px-6 lg:px-8 transition-colors">
         <div className="max-w-[350px] w-full mx-auto">
           <div className="flex justify-center mb-4">
             <img

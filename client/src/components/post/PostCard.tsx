@@ -8,7 +8,7 @@ import AddComment from "./AddComment";
 
 export default function PostCard(): React.ReactElement {
   return (
-    <article className="pb-4 mb-4 max-w-[560px] mx-auto border rounded-md border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+    <article className="pb-4 mb-4 border rounded-md border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
       <PostCardHeader />
       <div className="relative">
         <a href="#">

@@ -9,11 +9,13 @@ export default function AddComment(): React.ReactElement {
         placeholder="Add a comment..."
         className="text-sm w-full outline-none dark:text-white rounded-md p-1"
       />
-      <img
-        src={assets.icons.continue}
-        alt="Submit"
-        className="dark:invert dark:brightness-200"
-      />
+      <button type="button" className="btn">
+        <img
+          src={assets.icons.continue}
+          alt="Submit"
+          className="dark:invert dark:brightness-200"
+        />
+      </button>
     </div>
   );
 }
