@@ -86,15 +86,20 @@ export default function Sidebar(): React.ReactElement {
           } 
         `}
       >
-        <Link to="/" className="flex gap-2 items-center font-medium py-4 mb-8">
-          <img
-            src="/logo.png"
-            alt="My Circle"
-            className="h-6 object-contain dark:invert dark:brightness-200"
-          />
+        <div className="relative">
+          <Link
+            to="/"
+            className="flex gap-2 items-center font-medium py-4 mb-8"
+          >
+            <img
+              src="/logo.png"
+              alt="My Circle"
+              className="h-6 object-contain dark:invert dark:brightness-200"
+            />
+          </Link>
           <button
             title="Change your mode"
-            className="btn"
+            className="btn absolute top-2 -right-5"
             onClick={() => setDark(!dark)}
           >
             {dark ? (
@@ -107,7 +112,7 @@ export default function Sidebar(): React.ReactElement {
               <img src={assets.icons.moon} alt="Moon" />
             )}
           </button>
-        </Link>
+        </div>
 
         <ul className="flex-1 space-y-8 mt-6 lg:mt-0">
           {navbarItems.map((navbarItem) => (

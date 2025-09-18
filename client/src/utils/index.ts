@@ -1,3 +1,3 @@
-import { imagePreview } from "./image-preview";
+import { imagesPreview, imagePreview } from "./image-preview";
 
-export { imagePreview };
+export { imagePreview, imagesPreview };

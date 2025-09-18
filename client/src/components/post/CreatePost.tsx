@@ -4,7 +4,7 @@ import UserInfo from "./UserInfo";
 import PostInput from "./PostInput";
 import Emoji from "../shared/Emoji";
 import OpenGallery from "../shared/OpenGallery";
-import { imagePreview } from "../../utils";
+import { imagesPreview } from "../../utils";
 import AddLocation from "../shared/AddLocation";
 import type { ILocation } from "../../types";
 import AddTags from "../shared/AddTags";
@@ -57,7 +57,7 @@ export default function CreatePost(): React.ReactElement {
             <PostInput content={content} onContent={setContent} />
             {
               <div className="flex gap-2 mt-2 flex-wrap">
-                {imagePreview(files).map((src, idx) => (
+                {imagesPreview(files).map((src, idx) => (
                   <img
                     key={idx}
                     src={src}

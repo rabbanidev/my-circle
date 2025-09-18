@@ -3,6 +3,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/home";
+import Profile from "./pages/profile";
 
 export default function App() {
   return (
@@ -12,6 +13,8 @@ export default function App() {
 
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="/me" element={<Profile />} />
+        <Route path="/profile/:username" element={<Profile />} />
       </Route>
     </Routes>
   );
