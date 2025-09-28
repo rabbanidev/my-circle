@@ -1,0 +1,33 @@
+{
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"],
+  "compilerOptions": {
+    // File Layout
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    // Build CommonJS but allow ESM-style imports
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2020",
+
+    // Output Options
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    // Strict Mode
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitAny": true,
+
+    // Fix for express and other CJS libs
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+
+    // Clean build
+    "skipLibCheck": true
+  }
+}
