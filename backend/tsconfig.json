@@ -28,6 +28,12 @@
     "resolveJsonModule": true,
 
     // Clean build
-    "skipLibCheck": true
+    "skipLibCheck": true,
+
+    // Alias import
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    }
   }
 }
