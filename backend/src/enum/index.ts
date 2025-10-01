@@ -1,1 +1,3 @@
-export enum USER_ROLE {}
+export enum USER_ROLE {
+  USER = "user",
+}

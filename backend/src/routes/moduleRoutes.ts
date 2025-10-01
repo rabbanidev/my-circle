@@ -1,10 +1,10 @@
 import { IRoute } from "@/interfaces/route.interface";
-import { UserRoutes } from "@/modules/user/user.route";
+import { AuthRoutes } from "@/modules/auth/auth.route";
 
 const modulesRoutes: IRoute[] = [
   {
-    path: "/users",
-    route: UserRoutes,
+    path: "/auth",
+    route: AuthRoutes,
   },
 ];
 

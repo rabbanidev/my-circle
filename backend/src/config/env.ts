@@ -13,6 +13,7 @@ const envConfig = {
     refress_secret: process.env.JWT_REFRESS_SECRET,
     refress_expires_in: process.env.JWT_REFRESS_EXPIRES_IN,
   },
+  bcrypt_sald_rounds: process.env.BCRYPT_SALT_ROUNDS,
 };
 
 export default envConfig;
