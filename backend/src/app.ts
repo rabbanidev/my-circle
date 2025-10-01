@@ -1,6 +1,10 @@
 import cors from "cors";
 import express, { Application } from "express";
 import cookieParser from "cookie-parser";
+import {
+  globalErrorHandler,
+  notFoundHandler,
+} from "@/middlewares/error.middleware";
 
 const app: Application = express();
 
@@ -19,5 +23,11 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome server!" });
 });
+
+// TODO: Errors middlewares
+app.use(globalErrorHandler);
+
+// TODO: Not found route handler
+app.use(notFoundHandler);
 
 export default app;

@@ -39,7 +39,6 @@ const info = createLogger({
   ],
 });
 
-// Error logger
 const error = createLogger({
   level: "error",
   format: combine(

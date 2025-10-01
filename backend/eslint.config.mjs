@@ -22,7 +22,6 @@ export default [
     },
     rules: {
       // ---------- TypeScript ----------
-      "@typescript-eslint/consistent-type-definitions": ["error", "type"],
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/no-non-null-assertion": "warn",
