@@ -4,7 +4,7 @@ export interface IResponse<T> {
     limit: number;
     total: number;
   };
-  data: T;
+  data: T | null;
 }
 
 export interface ISendResponse<T> {

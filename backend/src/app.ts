@@ -5,6 +5,7 @@ import {
   globalErrorHandler,
   notFoundHandler,
 } from "@/middlewares/error.middleware";
+import apiRoutes from "@/routes";
 
 const app: Application = express();
 
@@ -23,6 +24,9 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome server!" });
 });
+
+// TODO: API routes
+app.use("/api", apiRoutes);
 
 // TODO: Errors middlewares
 app.use(globalErrorHandler);
