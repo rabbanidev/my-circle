@@ -4,10 +4,10 @@ import {
   removeCookie,
   removeLocalStorage,
   setCookie,
-} from "../../utils/storage";
-import envConfig from "../config/envConfig";
-import { constants } from "../../utils/constants";
-import type { IsErrorResponse } from "../../types/error.type";
+} from "../../utils/";
+import { envConfig } from "../config";
+import { constants } from "../../utils";
+import type { IsErrorResponse } from "../../types";
 
 export const instance = axios.create({
   withCredentials: true,
@@ -89,7 +89,7 @@ instance.interceptors.response.use(
       errorMessages: error?.response?.data?.errorMessages || [],
     };
 
-    // return { error: errorResponse };
-    return Promise.reject(errorResponse);
+    return { error: errorResponse };
+    // return Promise.reject({ error: errorResponse });
   }
 );

@@ -1,4 +1,4 @@
-interface IError {
+export interface IError {
   path: string | number;
   message: string;
 }

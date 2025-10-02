@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { tagTypeList } from "../../tagTypes";
-import envConfig from "../../../helper/config/envConfig";
+import { envConfig } from "../../../helper/config";
 import axiosBaseQuery from "../../../helper/axios/axiosBaseQuery";
 
 export const apiSlice = createApi({
