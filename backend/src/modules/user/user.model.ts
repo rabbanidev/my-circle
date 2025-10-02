@@ -9,7 +9,6 @@ const userSchema = new Schema<IUser, UserModel>(
     username: {
       type: String,
       required: false,
-      unique: true,
     },
     name: {
       type: String,
@@ -52,6 +51,11 @@ const userSchema = new Schema<IUser, UserModel>(
       virtuals: true,
     },
   },
+);
+
+userSchema.index(
+  { username: 1 },
+  { unique: true, partialFilterExpression: { username: { $type: "string" } } },
 );
 
 const selectFields = {
