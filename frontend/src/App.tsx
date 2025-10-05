@@ -4,12 +4,13 @@ import Register from "./pages/auth/Register";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/home";
 import Profile from "./pages/profile";
-import { useAuthCheck, useMyInfo } from "./hooks";
+import { useAuthCheck, useMyInfo, useSocket } from "./hooks";
 import AuthRoute from "./routes/AuthRoute";
 import PrivateRoute from "./routes/PrivateRoute";
 
 export default function App() {
   const authCheck = useAuthCheck();
+  useSocket();
   useMyInfo();
 
   if (!authCheck) {
