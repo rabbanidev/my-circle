@@ -1,12 +1,20 @@
-export default function ProfileNameBio() {
+export default function ProfileNameBio({
+  name,
+  bio,
+}: {
+  name: string;
+  bio?: string;
+}) {
   return (
     <>
       <h1 className="text-2xl font-bold text-gray-700 md:text-white dark:text-white">
-        Golam Rabbani
+        {name}
       </h1>
-      <p className="text-gray-700 md:text-gray-200 dark:text-gray-300">
-        MERN Stack Developer | Open Source Enthusiast 🚀
-      </p>
+      {bio && (
+        <p className="text-gray-700 md:text-gray-200 dark:text-gray-300">
+          {bio}
+        </p>
+      )}
     </>
   );
 }

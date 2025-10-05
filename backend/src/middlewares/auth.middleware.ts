@@ -14,9 +14,15 @@ const auth = (...requiredRoles: string[]) => {
         throw new ApiError(httpStatus.UNAUTHORIZED, "Your are not authorized!");
       }
 
+      // TODO: Check token format
+      const splittedToken = token.split(" ");
+      if (splittedToken.length !== 2 || splittedToken[0] !== "Bearer") {
+        throw new ApiError(httpStatus.UNAUTHORIZED, "Invalid token format!");
+      }
+
       // TODO: verify token
       const verifiedUser = jwtHelpers.verifyToken(
-        token,
+        splittedToken[1] as string,
         envConfig.jwt.access_secret as Secret,
       );
 

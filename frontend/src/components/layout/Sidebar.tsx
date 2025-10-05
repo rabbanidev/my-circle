@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import assets from "../../assets";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import Avatar from "../shared/Avatar";
+import { loggedOut } from "../../rtk/features/auth/authSlice";
+import { removeMyInfo } from "../../rtk/features/user/userSlice";
 
 interface INavbarItem {
   title: string;
@@ -33,8 +37,10 @@ const navbarItems: INavbarItem[] = [
 ];
 
 export default function Sidebar(): React.ReactElement {
+  const dispatch = useAppDispatch();
   const [open, setOpen] = useState<boolean>(false);
   const [dark, setDark] = useState<boolean>(false);
+  const { myInfo } = useAppSelector((state) => state.user);
 
   useEffect(() => {
     if (dark) {
@@ -43,6 +49,11 @@ export default function Sidebar(): React.ReactElement {
       document.documentElement.classList.remove("dark");
     }
   }, [dark]);
+
+  const logoutHandler = () => {
+    dispatch(loggedOut());
+    dispatch(removeMyInfo());
+  };
 
   return (
     <>
@@ -140,25 +151,45 @@ export default function Sidebar(): React.ReactElement {
           ))}
         </ul>
 
-        <div className="flex justify-between mt-auto">
-          <Link to="/me" className="flex items-center">
-            <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-300 dark:bg-gray-700">
-              <img
-                src="https://avatars.githubusercontent.com/u/61206200"
-                alt="User avatar"
-                className="w-full h-full object-cover"
-              />
+        {
+          /* User Info Section */
+          myInfo && (
+            <div className="flex justify-between items-center mt-auto">
+              <Link to="/me" className="flex items-center min-w-0">
+                <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-300 dark:bg-gray-700 flex-shrink-0">
+                  <Avatar name={myInfo.name} url={myInfo?.profileImage} />
+                </div>
+                <div className="ml-2 min-w-0">
+                  <span
+                    className="block font-semibold text-sm text-zinc-900 dark:text-zinc-100 truncate max-w-[120px]"
+                    title={myInfo.name}
+                  >
+                    {myInfo.name}
+                  </span>
+                  <p
+                    className="text-xs text-gray-500 dark:text-gray-400 leading-none truncate max-w-[140px]"
+                    title={myInfo?.username || myInfo.email}
+                  >
+                    {myInfo?.username ? myInfo.username : myInfo.email}
+                  </p>
+                </div>
+              </Link>
+
+              <button
+                type="button"
+                title="logout"
+                className="ml-2 w-8 h-8 flex items-center justify-center cursor-pointer"
+                onClick={logoutHandler}
+              >
+                <img
+                  src={assets.icons.logout}
+                  alt="Logout"
+                  className="w-4 h-4 object-contain"
+                />
+              </button>
             </div>
-            <div className="ml-2">
-              <span className="font-semibold text-sm text-zinc-900 dark:text-zinc-100">
-                Golam Rabbani
-              </span>
-              <p className="text-xs text-gray-500 dark:text-gray-400 leading-none">
-                rabbani.cse.eub@gmail.com
-              </p>
-            </div>
-          </Link>
-        </div>
+          )
+        }
       </aside>
     </>
   );

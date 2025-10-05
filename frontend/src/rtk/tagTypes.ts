@@ -1,3 +1,7 @@
-export const tagTypes = {};
+import { constants } from "../utils/constants";
 
-export const tagTypeList = [];
+export const tagTypes = {
+  USERINFO: constants.USERINFO,
+};
+
+export const tagTypeList: string[] = [...Object.values(tagTypes)];

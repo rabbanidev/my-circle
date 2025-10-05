@@ -16,6 +16,7 @@ import multipleUser from "./icon/multiple-user.svg";
 import smile from "./icon/smile.svg";
 import check from "./icon/check.svg";
 import camera from "./icon/camera.svg";
+import logout from "./icon/logout.svg";
 
 interface IAssests {
   icons: {
@@ -37,6 +38,7 @@ interface IAssests {
     smile: string;
     check: string;
     camera: string;
+    logout: string;
   };
 }
 
@@ -59,6 +61,7 @@ const assets: IAssests = {
     smile,
     check,
     camera,
+    logout,
     continue: continueIcon,
   },
 };

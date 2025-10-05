@@ -2,14 +2,14 @@ import { useState } from "react";
 import assets from "../../assets";
 import { imagePreview } from "../../utils";
 
-export default function AddCoverPhoto() {
+export default function AddCoverPhoto({ name }: { name: string }) {
   const [file, setFile] = useState<File | null>(null);
 
   return (
     <div className="relative w-full h-56 md:h-100 overflow-hidden rounded-md bg-gray-400">
       <img
         src={file ? imagePreview(file) : ""}
-        alt="Cover"
+        alt={name}
         className="w-full h-full object-cover"
       />
       <div className="absolute inset-0 bg-black/40 dark:bg-black/20"></div>

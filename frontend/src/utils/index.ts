@@ -10,6 +10,7 @@ import {
 } from "./storage";
 import { constants } from "./constants";
 import { decodeToken } from "./jwt";
+import { generateAvatar } from "./generateAvatar";
 
 export {
   constants,
@@ -23,4 +24,5 @@ export {
   removeLocalStorage,
   removeAllLocalStorage,
   decodeToken,
+  generateAvatar,
 };

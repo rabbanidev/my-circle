@@ -4,6 +4,7 @@ import usePortal from "./usePortal";
 import useOutsideClick from "./useOutsideClick";
 import useAuth from "./useAuth";
 import useAuthCheck from "./useAuthCheck";
+import useMyInfo from "./useMyInfo";
 
 const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 const useAppSelector = useSelector.withTypes<RootState>();
@@ -15,4 +16,5 @@ export {
   useOutsideClick,
   useAuth,
   useAuthCheck,
+  useMyInfo,
 };

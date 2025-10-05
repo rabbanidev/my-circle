@@ -4,12 +4,14 @@ import Register from "./pages/auth/Register";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/home";
 import Profile from "./pages/profile";
-import { useAuthCheck } from "./hooks";
+import { useAuthCheck, useMyInfo } from "./hooks";
 import AuthRoute from "./routes/AuthRoute";
 import PrivateRoute from "./routes/PrivateRoute";
 
 export default function App() {
   const authCheck = useAuthCheck();
+  useMyInfo();
+
   if (!authCheck) {
     return <div>Authentication Checking...</div>;
   }

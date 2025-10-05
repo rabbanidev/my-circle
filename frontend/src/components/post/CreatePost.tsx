@@ -8,17 +8,22 @@ import { imagesPreview } from "../../utils";
 import AddLocation from "../shared/AddLocation";
 import type { ILocation } from "../../types";
 import AddTags from "../shared/AddTags";
+import { useAppSelector } from "../../hooks";
+import Avatar from "../shared/Avatar";
 
-export default function CreatePost(): React.ReactElement {
+export default function CreatePost(): React.ReactElement | undefined {
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState<string>("");
   const [files, setFiles] = useState<File[]>([]);
   const [location, setLocation] = useState<ILocation | null>(null);
+  const { myInfo } = useAppSelector((state) => state.user);
 
-  let title: string = "Golam Rabbani";
+  let title: string = myInfo?.name ? `${myInfo.name}` : "";
   if (location) {
     title += ` is in ${location.display_name}`;
   }
+
+  if (!myInfo) return;
 
   return (
     <>
@@ -28,17 +33,13 @@ export default function CreatePost(): React.ReactElement {
       >
         <a
           href="#"
-          className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center"
+          className="w-9 h-8 rounded-full overflow-hidden flex items-center justify-center"
         >
-          <img
-            src="https://avatars.githubusercontent.com/u/61206200"
-            className="w-full h-full object-cover"
-            alt="Golam Rabbani"
-          />
+          {<Avatar name={myInfo.name} url={myInfo?.profileImage} />}
         </a>
 
         <div className="bg-gray-100 dark:bg-gray-800 w-full py-2 px-4 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-          What's on your mind, Golam Rabbani?
+          What's on your mind, {myInfo.name}?
         </div>
       </div>
 

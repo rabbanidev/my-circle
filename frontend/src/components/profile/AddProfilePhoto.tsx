@@ -2,13 +2,13 @@ import { useState } from "react";
 import assets from "../../assets";
 import { imagePreview } from "../../utils";
 
-export default function AddProfilePhoto() {
+export default function AddProfilePhoto({ name }: { name: string }) {
   const [file, setFile] = useState<File | null>(null);
   return (
     <div className="relative w-32 h-32 shrink-0">
       <img
         src={file ? imagePreview(file) : ""}
-        alt="Profile"
+        alt={name}
         className="w-full h-full rounded-full border-4 border-white shadow-lg object-cover"
       />
 
