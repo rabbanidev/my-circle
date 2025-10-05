@@ -10,11 +10,23 @@ const myInfo = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "My info fetched successfully.",
+    message: "My profile fetched successfully.",
+    data: result,
+  });
+});
+
+const getUser = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserService.getUser(req.params.userId as string);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "User profile fetched successfully.",
     data: result,
   });
 });
 
 export const UserController = {
   myInfo,
+  getUser,
 };

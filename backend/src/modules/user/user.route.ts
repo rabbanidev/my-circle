@@ -6,5 +6,6 @@ import { UserController } from "@/modules/user/user.controller";
 const router = express.Router();
 
 router.get("/me", auth(USER_ROLE.USER), UserController.myInfo);
+router.get("/:userId", UserController.getUser);
 
 export const UserRoutes = router;

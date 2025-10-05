@@ -42,7 +42,7 @@ export const handleCastError = (error: Error.CastError): IErrorResponse => {
   ];
 
   const statusCode = 400;
-  const message = "Cast Error";
+  const message = "Invalid Id";
   const errorMessages = errors;
 
   return {

@@ -12,6 +12,15 @@ const myInfo = async (payload: JwtPayload): Promise<Partial<IUser>> => {
   return result;
 };
 
+const getUser = async (userId: string): Promise<Partial<IUser>> => {
+  const result = await User.findById(userId).select("-password");
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User not found");
+  }
+  return result;
+};
+
 export const UserService = {
   myInfo,
+  getUser,
 };

@@ -13,9 +13,16 @@ const userApi = apiSlice.injectEndpoints({
       }),
       providesTags: [tagTypes.USERINFO],
     }),
+    getUserProfile: builder.query<IUser, string>({
+      query: (userId) => ({
+        url: `${userUrl}/${userId}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.USERINFO],
+    }),
   }),
 });
 
-export const { useGetMyInfoQuery } = userApi;
+export const { useGetMyInfoQuery, useGetUserProfileQuery } = userApi;
 
 export default userApi;

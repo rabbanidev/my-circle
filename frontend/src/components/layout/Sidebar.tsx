@@ -159,7 +159,7 @@ export default function Sidebar(): React.ReactElement {
                 <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-300 dark:bg-gray-700 flex-shrink-0">
                   <Avatar name={myInfo.name} url={myInfo?.profileImage} />
                 </div>
-                <div className="ml-2 min-w-0">
+                <div className="ml-2 min-w-0 py-2">
                   <span
                     className="block font-semibold text-sm text-zinc-900 dark:text-zinc-100 truncate max-w-[120px]"
                     title={myInfo.name}
@@ -167,7 +167,7 @@ export default function Sidebar(): React.ReactElement {
                     {myInfo.name}
                   </span>
                   <p
-                    className="text-xs text-gray-500 dark:text-gray-400 leading-none truncate max-w-[140px]"
+                    className="text-xs pb-1 text-gray-500 dark:text-gray-400 leading-none truncate max-w-[140px]"
                     title={myInfo?.username || myInfo.email}
                   >
                     {myInfo?.username ? myInfo.username : myInfo.email}
