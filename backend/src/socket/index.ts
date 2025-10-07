@@ -1,6 +1,9 @@
 import logger from "@/config/logger";
 import { Server as HttpServer } from "http";
 import { Server, Socket } from "socket.io";
+import { friendRequestSentHandler } from "@/socket/handlers/friendRequest.handler";
+import { socketAuthMiddleware } from "@/socket/socketAuthMiddleware";
+import { totalNotificationHandler } from "@/socket/handlers/notification.handler";
 
 let io: Server;
 
@@ -14,8 +17,19 @@ export const initSocket = (httpServer: HttpServer) => {
       transports: ["websocket", "polling"],
     });
 
+    // TODO: Apply JWT auth middleware
+    io.use(socketAuthMiddleware);
+
     io.on("connection", (socket: Socket) => {
-      logger.info("✅ Socket connected:", socket.id);
+      logger.info(`✅ Socket connected: ${socket.id}`);
+
+      const userId = socket.data?.user?.userId;
+      if (userId) {
+        socket.join(userId);
+      }
+
+      friendRequestSentHandler(io, socket);
+      totalNotificationHandler(io, socket);
 
       // TODO: Socket disconnected
       socket.on("disconnect", (reason) => {

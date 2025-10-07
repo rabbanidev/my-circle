@@ -1,29 +1,51 @@
 import { useEffect } from "react";
-import { useAppDispatch } from "./index";
+import { useAppDispatch, useAppSelector } from "./index";
+import { initSocket, disconnectSocket, updateSocketToken } from "../lib/socket";
 import {
-  connectSocket,
-  disconnectSocket,
+  socketConnected,
+  socketDisconnected,
+  socketUpdateToken,
 } from "../rtk/features/socket/socketSlice";
-import { socket } from "../lib/socket";
 
 const useSocket = () => {
   const dispatch = useAppDispatch();
+  const auth = useAppSelector((state) => state.auth);
 
+  // TODO: Socket init
   useEffect(() => {
-    dispatch(connectSocket());
+    const socket = initSocket();
 
     socket.on("connect", () => {
-      console.log("✅ Socket Connected:", socket.id);
+      console.log("✅ Socket connected", socket.id);
+      dispatch(socketConnected(socket.id));
     });
 
     socket.on("disconnect", () => {
-      console.log("❌ Socket Disconnected");
+      console.log("❌ Socket disconnected");
+      dispatch(socketDisconnected());
+    });
+
+    socket.on("connect_error", (err) => {
+      console.error("❌ Socket connect error:", err.message);
     });
 
     return () => {
-      dispatch(disconnectSocket());
+      socket.off("connect");
+      socket.off("disconnect");
+      disconnectSocket();
     };
   }, [dispatch]);
+
+  // TODO: Update token + reconnect when token changes
+  useEffect(() => {
+    if (auth?.accessToken) {
+      updateSocketToken(auth.accessToken);
+      dispatch(socketUpdateToken(auth.accessToken));
+    } else {
+      disconnectSocket();
+      dispatch(socketUpdateToken(undefined));
+    }
+  }, [auth?.accessToken, dispatch]);
 };
 
 export default useSocket;

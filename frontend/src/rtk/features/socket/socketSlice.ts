@@ -1,8 +1,10 @@
+import { type PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import { socket } from "../../../lib/socket";
 
 interface SocketState {
   connected: boolean;
+  socketId?: string;
+  socketToken?: string;
 }
 
 const initialState: SocketState = {
@@ -13,20 +15,21 @@ const socketSlice = createSlice({
   name: "socket",
   initialState,
   reducers: {
-    connectSocket: (state) => {
-      if (!socket.connected) {
-        socket.connect();
-      }
+    socketConnected: (state, action) => {
       state.connected = true;
+      state.socketId = action.payload;
     },
-    disconnectSocket: (state) => {
-      if (socket.connected) {
-        socket.disconnect();
-      }
+    socketDisconnected: (state) => {
       state.connected = false;
+      state.socketId = undefined;
+      state.socketToken = undefined;
+    },
+    socketUpdateToken: (state, action: PayloadAction<string | undefined>) => {
+      state.socketToken = action.payload;
     },
   },
 });
 
-export const { connectSocket, disconnectSocket } = socketSlice.actions;
+export const { socketConnected, socketDisconnected, socketUpdateToken } =
+  socketSlice.actions;
 export default socketSlice.reducer;

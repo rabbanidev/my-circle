@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import assets from "../../assets";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import Avatar from "../shared/Avatar";
-import { loggedOut } from "../../rtk/features/auth/authSlice";
-import { removeMyInfo } from "../../rtk/features/user/userSlice";
+import { getSocket } from "../../lib/socket";
+import SidebarUserInfo from "./SidebarUserInfo";
+import SidebarItem from "./SidebarItem";
 
 interface INavbarItem {
   title: string;
@@ -37,10 +36,11 @@ const navbarItems: INavbarItem[] = [
 ];
 
 export default function Sidebar(): React.ReactElement {
-  const dispatch = useAppDispatch();
+  const socket = getSocket();
   const [open, setOpen] = useState<boolean>(false);
   const [dark, setDark] = useState<boolean>(false);
-  const { myInfo } = useAppSelector((state) => state.user);
+  const [totalUnreadNotification, setTotalUnreadNotification] =
+    useState<number>(0);
 
   useEffect(() => {
     if (dark) {
@@ -50,10 +50,31 @@ export default function Sidebar(): React.ReactElement {
     }
   }, [dark]);
 
-  const logoutHandler = () => {
-    dispatch(loggedOut());
-    dispatch(removeMyInfo());
-  };
+  useEffect(() => {
+    if (!socket) return;
+
+    // TODO:
+    socket.emit("unread_total_notification_emit");
+
+    // TODO: Previous unread total notification count and state update
+    socket.on(
+      "unread_total_notification_count",
+      ({ total }: { total: number }) => {
+        setTotalUnreadNotification(total);
+      }
+    );
+
+    // TODO: New notification event and update total total state
+    socket.on("notification_received", ({ message }: { message: string }) => {
+      console.log("Notification received:", message);
+      setTotalUnreadNotification((prev) => prev + 1);
+    });
+
+    return () => {
+      socket.off("unread_total_notification_count");
+      socket.off("notification_received");
+    };
+  }, [socket]);
 
   return (
     <>
@@ -127,69 +148,15 @@ export default function Sidebar(): React.ReactElement {
 
         <ul className="flex-1 space-y-8 mt-6 lg:mt-0">
           {navbarItems.map((navbarItem) => (
-            <li key={navbarItem.title}>
-              <NavLink
-                to={navbarItem.to}
-                className={({ isActive }) =>
-                  `flex items-center gap-2 text-sm transition-colors
-                  ${
-                    isActive
-                      ? "text-blue-500 dark:text-blue-400"
-                      : "text-zinc-800 dark:text-zinc-200 hover:text-blue-500 dark:hover:text-blue-400"
-                  }`
-                }
-                onClick={() => setOpen(false)}
-              >
-                <img
-                  src={navbarItem.icon}
-                  alt={navbarItem.title}
-                  className="dark:invert dark:brightness-200"
-                />
-                <span>{navbarItem.title}</span>
-              </NavLink>
-            </li>
+            <SidebarItem
+              key={navbarItem.title}
+              item={navbarItem}
+              setOpen={setOpen}
+              total={totalUnreadNotification}
+            />
           ))}
         </ul>
-
-        {
-          /* User Info Section */
-          myInfo && (
-            <div className="flex justify-between items-center mt-auto">
-              <Link to="/me" className="flex items-center min-w-0">
-                <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-300 dark:bg-gray-700 flex-shrink-0">
-                  <Avatar name={myInfo.name} url={myInfo?.profileImage} />
-                </div>
-                <div className="ml-2 min-w-0 py-2">
-                  <span
-                    className="block font-semibold text-sm text-zinc-900 dark:text-zinc-100 truncate max-w-[120px]"
-                    title={myInfo.name}
-                  >
-                    {myInfo.name}
-                  </span>
-                  <p
-                    className="text-xs pb-1 text-gray-500 dark:text-gray-400 leading-none truncate max-w-[140px]"
-                    title={myInfo?.username || myInfo.email}
-                  >
-                    {myInfo?.username ? myInfo.username : myInfo.email}
-                  </p>
-                </div>
-              </Link>
-
-              <button
-                type="button"
-                title="logout"
-                className="ml-2 w-8 h-8 flex items-center justify-center cursor-pointer"
-                onClick={logoutHandler}
-              >
-                <img
-                  src={assets.icons.logout}
-                  alt="Logout"
-                  className="w-4 h-4 object-contain"
-                />
-              </button>
-            </div>
-          )
-        }
+        <SidebarUserInfo />
       </aside>
     </>
   );
