@@ -4,7 +4,7 @@ import Notification from "@/modules/notification/notification.model";
 import mongoose from "mongoose";
 import { Server, Socket } from "socket.io";
 
-export const friendRequestSentHandler = (io: Server, socket: Socket) => {
+export const sentFriendRequestHandler = (io: Server, socket: Socket) => {
   socket.on(
     "friend_request_sent",
     async ({ receiverId }: { receiverId: string }) => {

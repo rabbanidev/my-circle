@@ -7,8 +7,10 @@ const getMyFriendRequest = async (
   user: JwtPayload,
 ): Promise<IFriendRequest | null> => {
   const result = await FriendRequest.findOne({
-    sender: user.userId,
-    receiver: friendId,
+    $or: [
+      { sender: user.userId, receiver: friendId },
+      { sender: friendId, receiver: user.userId },
+    ],
   });
 
   return result;

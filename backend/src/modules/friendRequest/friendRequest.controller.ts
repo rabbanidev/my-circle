@@ -11,7 +11,7 @@ const getMyFriendRequest = catchAsync(async (req: Request, res: Response) => {
     req.user,
   );
   sendResponse<IFriendRequest>(res, {
-    statusCode: httpStatus.CREATED,
+    statusCode: httpStatus.OK,
     success: true,
     message: "Friend request fetched successfully!",
     data: result,

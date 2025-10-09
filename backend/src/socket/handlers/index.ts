@@ -1,9 +1,9 @@
 import { Server, Socket } from "socket.io";
-import { friendRequestSentHandler } from "@/socket/handlers/friendRequest.handler";
+import { sentFriendRequestHandler } from "@/socket/handlers/friendRequest.handler";
 import { totalNotificationHandler } from "@/socket/handlers/notification.handler";
 
 const socketHandlers = (io: Server, socket: Socket) => {
-  friendRequestSentHandler(io, socket);
+  sentFriendRequestHandler(io, socket);
   totalNotificationHandler(io, socket);
 };
 
