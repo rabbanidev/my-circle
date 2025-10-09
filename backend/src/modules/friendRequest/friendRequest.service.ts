@@ -1,22 +1,19 @@
-import httpStatus from "http-status";
-import { ApiError } from "@/utils/errors";
 import { JwtPayload } from "jsonwebtoken";
-import { friendRequestSentHandler } from "@/socket/handlers/friendRequest.handler";
+import FriendRequest from "@/modules/friendRequest/friendRequest.model";
+import { IFriendRequest } from "./friendRequest.interface";
 
-const friendRequestSent = async (
-  payload: {
-    userId: string;
-  },
+const getMyFriendRequest = async (
+  friendId: string,
   user: JwtPayload,
-) => {
-  if (payload.userId === user.userId) {
-    throw new ApiError(
-      httpStatus.BAD_REQUEST,
-      "You cannot send a friend request to yourself.",
-    );
-  }
+): Promise<IFriendRequest | null> => {
+  const result = await FriendRequest.findOne({
+    sender: user.userId,
+    receiver: friendId,
+  });
+
+  return result;
 };
 
 export const FriendRequestService = {
-  friendRequestSent,
+  getMyFriendRequest,
 };

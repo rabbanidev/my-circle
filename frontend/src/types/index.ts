@@ -10,6 +10,8 @@ import type {
   IAuthUser,
 } from "./auth.type";
 
+import type { IFriendRequest } from "./friendRequest.type";
+
 export type {
   IError,
   IsErrorResponse,
@@ -21,4 +23,5 @@ export type {
   IAuthState,
   IAuthUser,
   IUser,
+  IFriendRequest,
 };

@@ -1,9 +1,8 @@
 import logger from "@/config/logger";
 import { Server as HttpServer } from "http";
 import { Server, Socket } from "socket.io";
-import { friendRequestSentHandler } from "@/socket/handlers/friendRequest.handler";
 import { socketAuthMiddleware } from "@/socket/socketAuthMiddleware";
-import { totalNotificationHandler } from "@/socket/handlers/notification.handler";
+import socketHandlers from "@/socket/handlers";
 
 let io: Server;
 
@@ -28,8 +27,8 @@ export const initSocket = (httpServer: HttpServer) => {
         socket.join(userId);
       }
 
-      friendRequestSentHandler(io, socket);
-      totalNotificationHandler(io, socket);
+      // TODO: All Socket handler
+      socketHandlers(io, socket);
 
       // TODO: Socket disconnected
       socket.on("disconnect", (reason) => {

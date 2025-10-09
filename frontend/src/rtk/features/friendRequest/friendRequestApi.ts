@@ -1,19 +1,19 @@
+import type { IFriendRequest } from "../../../types";
 import apiSlice from "../api/apiSlice";
 
 const friendRequestUrl: string = "/friend-request";
 
 const friendRequestApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    friendRequestSent: builder.mutation<undefined, { userId: string }>({
-      query: (data) => ({
-        url: `${friendRequestUrl}/request/sent`,
-        method: "POST",
-        data: data,
+    getMyFriendRequest: builder.query<IFriendRequest, { friendId: string }>({
+      query: ({ friendId }) => ({
+        url: `${friendRequestUrl}/my-friend-request/${friendId}`,
+        method: "GET",
       }),
     }),
   }),
 });
 
-export const { useFriendRequestSentMutation } = friendRequestApi;
+export const { useGetMyFriendRequestQuery } = friendRequestApi;
 
 export default friendRequestApi;
